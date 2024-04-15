@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Author</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangoapp/style.css' %}">
+    <style>
+        .navbar {
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            margin-top: 12px;
+            
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-bottom: 10px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2>Author Details</h2>
+        <a href="{% url 'djangoapp:main' %}" class="nav-link" role="button">Home</a>
+    </nav>
+    <div style="padding: 10px">
+        <p>Name: {{ author.fullname }}</p>
+        <p>Born Date: {{ author.born_date }}</p>
+        <p>Born Location: {{ author.born_location }}</p>
+        <p>Description: {{ author.description }}</p>
+    </div>
+</body>
+
+</html>

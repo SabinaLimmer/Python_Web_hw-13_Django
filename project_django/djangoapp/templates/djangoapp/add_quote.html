@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Quote</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangoapp/style.css' %}">
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            border-bottom: 2px solid;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2>Add New Quote</h2>
+        <a href="{% url 'djangoapp:main' %}" role="button">Home</a>
+    </nav>
+    <div style="padding: 10px">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add Quote</button>
+        </form>
+    </div>
+</body>
+
+</html>

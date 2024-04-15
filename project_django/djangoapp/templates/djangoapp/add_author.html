@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Author</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangoapp/style.css' %}">
+    <style>
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            border-bottom: 2px solid;
+        }
+
+        .navbar h2 {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h2>Add New Author</h2>
+        <a href="{% url 'djangoapp:main' %}" role="button">Home</a>
+    </nav>
+    <div style="padding: 10px">
+        <form method="post">
+            {% csrf_token %}
+            <p>Full Name: {{ form.fullname }}</p>
+            <p>Born Date (YYYY-MM-DD): {{ form.born_date }}</p>
+            <p>Born Location: {{ form.born_location }}</p>
+            <p>Description: {{ form.description }}</p>
+            <button type="submit">Add Author</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+{% extends "djangoapp/base.html" %}
+
+{% block content %}
+<h2>Login</h2>
+
+{% if messages %}
+<div>
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert-{{ message.tags }}" {% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<form action="{% url 'users:login' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+    </div>
+
+    <div>
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+    </div>
+
+    <div>
+        <button type="submit">Login</button>
+    </div>
+
+    <div class="small text-center">
+        <a href="{% url "users:password_reset" %}" class="text-center"><i>Forgot Password?</i></a>
+    </div>
+    
+</form>
+{% endblock %}

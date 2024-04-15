@@ -1,0 +1,37 @@
+{% extends "djangoapp/base.html" %}
+
+{% block content %}
+<h2>Sign Up</h2>
+
+<form method="post" action="{% url 'users:signup' %}">
+    {% csrf_token %}
+    <div>
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+        <span>{{ form.errors.username }}</span>
+    </div>
+
+    <div>
+        <label for="id_password1">Password:</label>
+        {{ form.password1 }}
+        <span>{{ form.errors.password1 }}</span>
+    </div>
+
+    <div>
+        <label for="id_password2">Password confirmation:</label>
+        {{ form.password2 }}
+        <span>{{ form.errors.password2 }}</span>
+    </div>
+
+    <div>
+        <label> Email:
+            {{ form.email }}
+        </label>
+        <span>{{ form.errors.email }}</span>
+    </div>
+
+    <div>
+        <button type="submit">Sign Up</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'djangoapp/style.css' %}">
+    <style>
+        .navbar {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid;
+            padding-left: 30px;
+            padding-right: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            margin-right: 10px;
+        }
+
+        .quote {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <h1>Quotes</h1>
+        <nav style="margin-bottom: 10px; padding-right: 5px;">
+            {% if user.is_authenticated %}
+            <a href="{% url 'users:logout' %}" role="button">Logout</a>
+            {% else %}
+            <a href="{% url 'users:login' %}" role="button">Login</a>
+            <a href="{% url 'users:signup' %}" role="button">Sign Up</a>
+            {% endif %}
+        </nav>
+    </nav>
+    <div style="padding: 10px">
+        <div>
+            <ul style="list-style-type: none; padding: 0;">
+                <li style="display: inline-block;"><a href="{% url 'djangoapp:add_author' %}" role="button">Add
+                        Author</a></li>
+                <li style="display: inline-block;"><a href="{% url 'djangoapp:add_quote' %}" role="button">Add Quote</a>
+                </li>
+                <li style="display: inline-block;"><a href="{% url 'djangoapp:all_authors' %}" role="button">All
+                        Authors</a></li>
+                <li style="display: inline-block;"><a href="{% url 'djangoapp:all_quotes' %}" role="button">All
+                        Quotes</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="padding: 10px">
+        <div>
+            {% for quote in quotes %}
+            <div class="quote">
+                <p>{{ quote.quote }}</p>
+                <p>by {{ quote.author }} (<a href="{% url 'djangoapp:about_author' quote.author.id %}">about</a>)</p>
+                <p>Tags: {% for tag in quote.tags.all %}{{ tag.name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>
